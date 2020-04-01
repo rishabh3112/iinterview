@@ -2,18 +2,17 @@ import {Table, Column, Model, CreatedAt, UpdatedAt, AllowNull, Unique} from 'seq
 import {DataType} from 'sequelize-typescript';
 
 @Table
-export default class User extends Model<User> {
+export default class Question extends Model<Question> {
 
+  @AllowNull(false)
   @Column
   name: string;
 
-  @Unique
-  @Column
-  username: string;
+  @Column(DataType.TEXT)
+  description: string;
 
   @AllowNull(false)
-  @Column(DataType.TEXT)
-  password: string;
+  rating: number;
 
   @CreatedAt
   creationDate: Date;

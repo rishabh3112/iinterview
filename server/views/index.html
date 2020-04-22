@@ -1,0 +1,14 @@
+{% extends "master.html" %}
+{% block content %}
+<div class="banner"></div>
+<div class="banner-content w-full px-2 flex flex-col text-center align-center justify-center items-center">
+    <h1 class="block font-display text-5xl text-blue-700">Crack your coding interview with <span class="text-yellow-600">AI</span>!</h1>
+    <h4 class="block text-2xl">Tool to streamline your coding preperation with the questions you need</h4>
+    {% if user %}
+    {% else %}
+    <a href="/auth" class="mt-2 text-white bg-blue-500 hover:bg-blue-600 hover:shadow-md px-2 py-1 rounded shadow-sm">
+        Login
+      </a>
+    {% endif %}
+</div>
+{% endblock %}

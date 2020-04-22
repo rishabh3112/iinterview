@@ -9,5 +9,5 @@ export default class Topic extends Model<Topic> {
 
   @Column(DataType.TEXT)
   description: string;
-  
+
 }

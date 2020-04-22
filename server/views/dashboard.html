@@ -1,0 +1,62 @@
+{% extends "master.html" %}
+{% block content %}
+  <div class="w-full h-64 grid grid-cols-6">
+    <div class="col-start-1 col-end-4 p-2 pt-5 text-center">
+      <span class="font-display text-4xl">Hi {{user.name}}!</span>
+      <p class="font-body text-xl">A dream does not become reality through magic; it takes sweat, determination, and hard work!</p>
+    </div>
+    <div class="col-start-5 col-end-7 bg-white p-2 m-2 rounded relative shadow-lg">
+      <span class="block text-xl text-gray-700">
+        Next Question
+      </span>
+      <span class="block text-2xl">{{recommendedQuestion.name}}</span>
+      <p>
+        {{recommendedQuestion.description.substr(0,100)}}...
+      </p>
+      <a href="/question/{{recommendedQuestion.id}}" class="absolute inset-x-0 bottom-0 text-white bg-blue-500 px-2 py-1 rounded shadow-sm hover:bg-blue-600 hover:shadow-md bottom">
+        Go to question
+      </a>
+    </div>
+  </div>
+  <p class="font-body text-3xl m-6 mt-6 mb-1">
+    Topics
+  </p>
+  <hr>
+  <div class="flex pl-6 pt-3">
+    {% for topic in topics %}
+    <a href="/topic/{{topic.id}}" class="bg-blue-800 inline-flex items-center justify-center h-32 w-40 m-1 rounded overflow-hidden shadow-lg">
+        <div class="font-display text-center text-white uppercase">
+            {{topic.name}}
+        </div>
+    </a>
+    {% endfor %}
+  </div>
+  <p class="font-body text-3xl ml-6 mt-6 mb-1">
+    Questions
+  </p>
+  <hr>
+    <div class="m-6 mt-3">
+    <table class="table-fixed w-full">
+        <thead>
+          <tr>
+            <th class="px-4 py-2">Sno.</th>
+            <th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Rating</th>
+          
+          </tr>
+        </thead>
+        <tbody>
+            </tr>
+            {% for question in questions %}
+            <tr>
+            <td class = "border px-4 py-2">{{question.id}}</td>  
+            <td class = "border px-4 py-2"> 
+            <a href="/question/{{question.id}}">{{question.name}}</a></td>  
+            <td class = "border px-4 py-2">{{question.rating}}</td>
+            </tr>
+            {% endfor %}
+    
+        </tbody>
+      </table>
+    </div>
+{% endblock %}

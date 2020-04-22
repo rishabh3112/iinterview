@@ -6,12 +6,12 @@ import Question from "./question";
 
 @Table
 export default class Attempts extends Model<Attempts> {
-  
+
   @ForeignKey(() => User)
   @AllowNull(false)
   @Column
   userId: number;
-  
+
   @ForeignKey(() => Question)
   @AllowNull(false)
   @Column
@@ -20,7 +20,7 @@ export default class Attempts extends Model<Attempts> {
   @AllowNull(false)
   @Column
   status: boolean;
-  
+
   @Column(DataType.TEXT)
   solution : string;
 

@@ -12,6 +12,7 @@ export default class Question extends Model<Question> {
   description: string;
 
   @AllowNull(false)
+  @Column
   rating: number;
 
   @CreatedAt

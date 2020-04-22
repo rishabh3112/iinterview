@@ -5,12 +5,12 @@ import Question from "./question";
 
 @Table
 export default class PartOf extends Model<PartOf> {
-  
+
   @ForeignKey(() => Topic)
   @AllowNull(false)
   @Column
   topicId: number;
-  
+
   @ForeignKey(() => Question)
   @AllowNull(false)
   @Column

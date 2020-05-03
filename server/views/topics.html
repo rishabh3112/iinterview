@@ -1,0 +1,33 @@
+{% extends "master.html" %}
+{% block content %}
+<h1 class="p-4 font-display">{{topic.name}}</h1>
+<p class="text-gray-800">{{topic,description}}</p>
+
+<p class="font-body text-3xl ml-6 mt-6 mb-1">
+    Questions
+  </p>
+  <hr>
+    <div class="m-6 mt-3">
+    <table class="table rounded-lg text-sm font-medium text-gray-700 text-left w-full">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="w-1 px-4 py-2">Sno.</th>
+            <th class="w-1 px-4 py-2">Rating</th>
+            <th class="px-4 py-2">Name</th>
+          </tr>
+        </thead>
+        <tbody class="text-sm font-normal text-gray-700">
+            </tr>
+            {% for question in questions %}
+            <tr class="hover:bg-gray-100 border-b border-gray-200 py-10">
+            <td class = "px-4 py-2">{{question.id}}</td>  
+            <td class = "px-4 py-2">{{question.rating}}</td>
+            <td class = "px-4 py-2"> 
+            <a class="text-blue-500" href="/question/{{question.id}}">{{question.name}}</a></td>  
+            </tr>
+            {% endfor %}
+    
+        </tbody>
+      </table>
+    </div>
+{% endblock %}

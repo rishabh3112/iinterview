@@ -36,22 +36,21 @@
   </p>
   <hr>
     <div class="m-6 mt-3">
-    <table class="table w-full">
-        <thead>
+    <table class="table rounded-lg text-sm font-medium text-gray-700 text-left w-full">
+        <thead class="bg-gray-200">
           <tr>
             <th class="w-1 px-4 py-2">Sno.</th>
             <th class="w-1 px-4 py-2">Rating</th>
             <th class="px-4 py-2">Name</th>
-          
           </tr>
         </thead>
-        <tbody>
+        <tbody class="text-sm font-normal text-gray-700">
             </tr>
             {% for question in questions %}
-            <tr>
-            <td class = "border px-4 py-2">{{question.id}}</td>  
-            <td class = "border px-4 py-2">{{question.rating}}</td>
-            <td class = "border px-4 py-2"> 
+            <tr class="hover:bg-gray-100 border-b border-gray-200 py-10">
+            <td class = "px-4 py-2">{{question.id}}</td>  
+            <td class = "px-4 py-2">{{question.rating}}</td>
+            <td class = "px-4 py-2"> 
             <a class="text-blue-500" href="/question/{{question.id}}">{{question.name}}</a></td>  
             </tr>
             {% endfor %}

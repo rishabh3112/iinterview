@@ -36,12 +36,12 @@
   </p>
   <hr>
     <div class="m-6 mt-3">
-    <table class="table-fixed w-full">
+    <table class="table w-full">
         <thead>
           <tr>
-            <th class="px-4 py-2">Sno.</th>
+            <th class="w-1 px-4 py-2">Sno.</th>
+            <th class="w-1 px-4 py-2">Rating</th>
             <th class="px-4 py-2">Name</th>
-            <th class="px-4 py-2">Rating</th>
           
           </tr>
         </thead>
@@ -50,9 +50,9 @@
             {% for question in questions %}
             <tr>
             <td class = "border px-4 py-2">{{question.id}}</td>  
-            <td class = "border px-4 py-2"> 
-            <a href="/question/{{question.id}}">{{question.name}}</a></td>  
             <td class = "border px-4 py-2">{{question.rating}}</td>
+            <td class = "border px-4 py-2"> 
+            <a class="text-blue-500" href="/question/{{question.id}}">{{question.name}}</a></td>  
             </tr>
             {% endfor %}
     

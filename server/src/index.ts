@@ -354,13 +354,13 @@ app.get(
     res: express.Response,
     next: express.NextFunction
   ) => {
-    const topic = Topic.findOne({
+    const topic = await Topic.findOne({
       where: {
         id: req.params.id,
       },
     });
 
-    const questionIDs = PartOf.findAll({
+    const questionIDs = await PartOf.findAll({
       where: {
         topicId: req.params.id,
       },

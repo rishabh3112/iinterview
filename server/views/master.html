@@ -1,41 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>iInterview - {{title}}</title>
-    <link rel="stylesheet" href="/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500&family=Fredoka+One&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  </head>             
-<body class="font-body">
-  <div class="flex items-center justify-around py-1 mb-1 text-white bg-gray-800">
-    <a href="/" class="inline-block text-4xl xl:text-5xl lg:text-4xl md:text-4xl sm:text-4xl text-blue-300 font-display">
-      <span class="text-yellow-300">i</span>Interview
-    </a>
-    
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500&family=Fredoka+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-body flex flex-col min-h-screen">
+    <div class="flex items-center justify-around py-1 text-white bg-gray-800">
+      <a href="/" class="inline-block text-4xl text-blue-300 font-display">
+        <span class="text-yellow-300">i</span>Interview
+      </a>
+
       {% if user %}
       <div class="flex items-center float-right jusify-between">
-        <span class="mx-4">Hi! <a href="/dashboard" class="underline">{{user.name}}</a></span>
-        <a href="/logout" class="text-white bg-blue-500 px-2 py-1 rounded shadow-sm hover:bg-blue-600 hover:shadow-md">
+        <span class="mx-4"
+          >Hi! <a href="/dashboard" class="underline">{{user.name}}</a></span
+        >
+        <a
+          href="/logout"
+          class="text-white bg-blue-500 px-2 py-1 rounded shadow-sm hover:bg-blue-600 hover:shadow-md"
+        >
           Log out
         </a>
       </div>
       {% else %}
-      <a href="/auth" class="flex items-center float-right jusify-between text-white bg-blue-500 hover:bg-blue-600 hover:shadow-md px-2 py-1 rounded shadow-sm">
+      <a
+        href="/auth"
+        class="flex items-center float-right jusify-between text-white bg-blue-500 hover:bg-blue-600 hover:shadow-md px-2 py-1 rounded shadow-sm"
+      >
         Login
       </a>
       {% endif %}
-    
-  </div>
-  <div class="content rounded-md h-full bg-white">
-    {% block content %} {% endblock %}
-  </div>
-  <footer class="w-full p-2">
-    <a href="/admin">
-      <div class="text-grey-600 float-right">Admin Panel</div>
-    </a>
-  </footer>
-  <script href="/index.js" type="javascript"></script>
-</body>
+    </div>
+    <div class="content rounded-md w-full bg-white flex-grow">
+      <div class="block w-full">
+        {% block content %} {% endblock %}
+      </div>
+    </div>
+    <footer class="w-full py-2 px-4 bg-gray-800 text-white">
+      <a href="/admin">
+        <div
+          class="text-grey-600 float-right rounded-full w-8 h-8 p-1 hover:bg-blue-700 hover:shadow-md"
+        >
+          <span class="material-icons">
+            security
+          </span>
+        </div>
+      </a>
+    </footer>
+    <script href="/index.js" type="javascript"></script>
+  </body>
 </html>

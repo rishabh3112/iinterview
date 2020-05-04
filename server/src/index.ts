@@ -64,21 +64,21 @@ app.get(
 
 app.post(
   "/admin/question/add",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) => {
     if ((req.user as User).username !== "admin") {
-      res.status(401).json("Unauthorised");
+      res.status(500).render("fallback.html", { user: req.user });
       return;
     }
 
     const { name, description, rating, topic } = req.body;
     const topicExist = await getTopic({ id: topic });
     if (!topicExist) {
-      return res.status(401).json("Topic doesn't exist");
+      return res.status(500).json("Topic doesn't exist");
     }
     try {
       const question = await Question.create({ name, description, rating });
@@ -89,22 +89,30 @@ app.post(
       res.redirect("/admin");
     } catch (err) {
       res
-        .status(401)
+        .status(500)
         .json({ msg: "Error is encountered while creating question" });
     }
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.post(
   "/admin/topic/add",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) => {
     if ((req.user as User).username !== "admin") {
-      res.status(401).json("Unauthorised");
+      res.status(500).render("fallback.html", { user: req.user });
       return;
     }
 
@@ -114,22 +122,30 @@ app.post(
       res.redirect("/admin");
     } catch (err) {
       res
-        .status(401)
+        .status(500)
         .json({ msg: "Error is encountered while creating topic" });
     }
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.post(
   "/admin/topic/update/:id(\\d+)",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) => {
     if ((req.user as User).username !== "admin") {
-      res.status(401).json("Unauthorised");
+      res.status(500).render("fallback.html", { user: req.user });
       return;
     }
 
@@ -140,7 +156,7 @@ app.post(
       });
 
       if (!topic) {
-        res.status(401).json({ msg: "Topic not found." });
+        res.status(500).json({ msg: "Topic not found." });
       }
       topic.name = name;
       topic.description = description;
@@ -148,21 +164,29 @@ app.post(
 
       res.redirect("/admin");
     } catch (err) {
-      res.status(401).json({ msg: "Error is encountered while update topic" });
+      res.status(500).json({ msg: "Error is encountered while update topic" });
     }
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.get(
   "/admin/topic/remove/:id(\\d+)",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) => {
     if ((req.user as User).username !== "admin") {
-      res.status(401).json("Unauthorised");
+      res.status(500).render("fallback.html", { user: req.user });
       return;
     }
     try {
@@ -171,29 +195,37 @@ app.get(
       });
 
       if (!topic) {
-        res.status(401).json({ msg: "Topic not found." });
+        res.status(500).json({ msg: "Topic not found." });
       }
 
       topic.destroy();
       res.redirect("/admin");
     } catch (err) {
       res
-        .status(401)
+        .status(500)
         .json({ msg: "Error is encountered while deleting topic" });
     }
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.post(
   "/admin/question/update/:id(\\d+)",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) => {
     if ((req.user as User).username !== "admin") {
-      res.status(401).json("Unauthorised");
+      res.status(500).render("fallback.html", { user: req.user });
       return;
     }
 
@@ -204,7 +236,7 @@ app.post(
       });
 
       if (!question) {
-        res.status(401).json({ msg: "Question not found." });
+        res.status(500).json({ msg: "Question not found." });
       }
       question.name = name;
       question.description = description;
@@ -214,22 +246,30 @@ app.post(
       res.redirect("/admin");
     } catch (err) {
       res
-        .status(401)
+        .status(500)
         .json({ msg: "Error is encountered while update question" });
     }
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.get(
   "/admin/question/remove/:id(\\d+)",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) => {
     if ((req.user as User).username !== "admin") {
-      res.status(401).json("Unauthorised");
+      res.status(500).render("fallback.html", { user: req.user });
       return;
     }
     try {
@@ -238,29 +278,37 @@ app.get(
       });
 
       if (!question) {
-        res.status(401).json({ msg: "Question not found." });
+        res.status(500).json({ msg: "Question not found." });
       }
 
       question.destroy();
       res.redirect("/admin");
     } catch (err) {
       res
-        .status(401)
+        .status(500)
         .json({ msg: "Error is encountered while deleting question" });
     }
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.get(
   "/admin/topic/:id(\\d+)",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) => {
     if ((req.user as User).username !== "admin") {
-      res.status(401).json("Unauthorised");
+      res.status(500).render("fallback.html", { user: req.user });
       return;
     }
     const topic = await Topic.findOne({
@@ -273,19 +321,27 @@ app.get(
       topic,
       user: req.user,
     });
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.get(
   "/admin",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) => {
     if ((req.user as User).username !== "admin") {
-      res.status(401).json("Unauthorised");
+      res.status(500).render("fallback.html", { user: req.user });
       return;
     }
     const allQuestions = await Question.findAll();
@@ -296,19 +352,27 @@ app.get(
       topics: allTopics,
       user: req.user,
     });
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.get(
   "/admin/question/:id(\\d+)",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) => {
     if ((req.user as User).username !== "admin") {
-      res.status(401).json("Unauthorised");
+      res.status(500).render("fallback.html", { user: req.user });
       return;
     }
     const question = await Question.findOne({
@@ -322,12 +386,20 @@ app.get(
       question,
       topics: allTopics,
     });
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.get(
   "/question/:id(\\d+)",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
@@ -343,12 +415,20 @@ app.get(
       user: req.user,
       question,
     });
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.get(
   "/topic/:id(\\d+)",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
@@ -382,6 +462,14 @@ app.get(
       topic,
       questions,
     });
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
@@ -400,7 +488,7 @@ app.post(
       const user = await getUser({ username });
       if (!user) {
         return res
-          .status(401)
+          .status(500)
           .redirect(
             "/auth?e=" + encodeURIComponent("Incorrect username or password")
           );
@@ -415,12 +503,20 @@ app.post(
         res.status(200).redirect("/dashboard");
       } else {
         return res
-          .status(401)
+          .status(500)
           .redirect(
             "/auth?e=" + encodeURIComponent("Incorrect username or password")
           );
       }
     }
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
@@ -435,7 +531,7 @@ app.post(
     const userExist = await getUser({ username });
     if (userExist) {
       return res
-        .status(401)
+        .status(500)
         .redirect("/auth?e=" + encodeURIComponent("Username already taken"));
     }
     const hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -445,12 +541,20 @@ app.post(
       username,
     });
     return res.redirect("/auth");
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
 app.get(
   "/logout",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (
     req: express.Request,
     res: express.Response,
@@ -459,23 +563,42 @@ app.get(
     res.clearCookie("token");
     req.logOut();
     res.redirect("/");
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 
-app.get("/auth", (req: express.Request, res: express.Response) => {
-  if (req.query.e) {
-    res.render("auth.html", {
-      title: "auth",
-      message: req.query.e.replace(/<[^>]*>?/gm, ""),
-    });
-    return;
+app.get(
+  "/auth",
+  (req: express.Request, res: express.Response) => {
+    if (req.query.e) {
+      res.render("auth.html", {
+        title: "auth",
+        message: req.query.e.replace(/<[^>]*>?/gm, ""),
+      });
+      return;
+    }
+    res.render("auth.html", { title: "auth" });
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
-  res.render("auth.html", { title: "auth" });
-});
+);
 
 app.get(
   "/dashboard",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false, failWithError: true }),
   async (req: express.Request, res: express.Response) => {
     const allQuestions = await Question.findAll();
     const allTopics = await Topic.findAll();
@@ -488,6 +611,14 @@ app.get(
       recommendedQuestion: nextQuestion,
       topics: allTopics,
     });
+  },
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res.render("fallback.html", { user: req.user });
   }
 );
 

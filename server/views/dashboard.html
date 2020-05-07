@@ -1,11 +1,11 @@
 {% extends "master.html" %}
 {% block content %}
-  <div class="w-full h-64 grid grid-cols-6">
-    <div class="col-start-1 col-end-4 p-2 pt-5 text-center align-middle">
+  <div class="w-full flex flex-col sm:flex-row">
+    <div class="h-48 m-2 mt-4 text-center align-middle">
       <span class="font-display text-4xl">Hi {{user.name}}!</span>
       <p class="font-body text-xl">A dream does not become reality through magic; it takes sweat, determination, and hard work!</p>
     </div>
-    <div class="col-start-5 col-end-7 bg-white p-2 m-2 rounded relative shadow-lg">
+    <div class="h-48 m-2 mt-4 bg-white rounded relative">
       <span class="block text-xl text-gray-700">
         Next Question
       </span>
@@ -13,7 +13,7 @@
       <p>
         {{recommendedQuestion.description.substr(0,100)}}...
       </p>
-      <a href="/question/{{recommendedQuestion.id}}" class="absolute inset-x-0 bottom-0 text-white bg-blue-500 px-2 py-1 rounded shadow-sm hover:bg-blue-600 hover:shadow-md bottom">
+      <a href="/question/{{recommendedQuestion.id}}" class="absolute inset-x-0 bottom-0 text-white bg-blue-500 px-2 py-1 rounded shadow-sm hover:bg-blue-600 bottom">
         Go to question
       </a>
     </div>
@@ -22,9 +22,9 @@
     Topics
   </p>
   <hr>
-  <div class="flex pl-6 pt-3">
+  <div class="flex w-full overflow-x-scroll pl-6 pt-3">
     {% for topic in topics %}
-    <a href="/topic/{{topic.id}}" class="bg-blue-800 inline-flex items-center justify-center h-32 w-40 m-1 rounded overflow-hidden shadow-lg">
+    <a href="/topic/{{topic.id}}" class="topic-card transition duration-500 ease-in-out inline-flex flex-grow items-center justify-center w-40 m-1 rounded overflow-hidden hover:bg-blue-700 hover:shadow-2xl" style="min-width: 150px; min-height: 100px; max-width: 150px;">
         <div class="font-display text-center text-white uppercase">
             {{topic.name}}
         </div>

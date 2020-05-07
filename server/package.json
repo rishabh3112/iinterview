@@ -13,7 +13,7 @@
     "build": "yarn build:ts && yarn build:css",
     "serve": "node .",
     "start:ts": "yarn build:ts && yarn serve",
-    "start": "yarn build:css && yarn start:ts",
+    "start": "yarn serve",
     "watch": "nodemon --exec 'clear && yarn build:ts && yarn serve' -e ts,html",
     "watch:ts": "nodemon --exec 'clear && yarn start:ts' -e ts",
     "watch:html": "nodemon --exec 'clear && yarn build:css && yarn serve' -e html"

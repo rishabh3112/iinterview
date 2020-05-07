@@ -1,11 +1,19 @@
-{% extends "master.html" %}
-{% block content %}
+{% extends "master.html" %} {% block content %}
 <div class="p-3">
-    <h1 class="font-display text-gray-700 text-3xl ">{{question.name}}</h1>
-    <pre class="font-body text-gray-900 p-2 mt-3 shadow-md w-full"> {{question.description}} </pre>
-    <div class="flex justify-center"> 
-        <button class="p-2 bg-green-500 text-white rounded m-2">Solved without help</button>
-        <button class="p-2 bg-red-500 text-white rounded m-2">Solved with help</button>
-    </div>
+  <h1 class="font-display text-gray-700 text-3xl">{{question.name}}</h1>
+  <span class="float-right text-blue-700">
+    Last updated on {{question.updatedOn}}
+  </span>
+  <pre class="font-body text-gray-900 p-2 mt-3 shadow-md w-full">
+ {{question.description}} </pre
+  >
+  <div class="flex justify-center">
+    <button class="p-2 bg-green-500 text-white rounded m-2">
+      Solved without help
+    </button>
+    <button class="p-2 bg-red-500 text-white rounded m-2">
+      Solved with help
+    </button>
+  </div>
 </div>
 {% endblock %}
